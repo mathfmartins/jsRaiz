@@ -9,81 +9,132 @@ const student = {
   ]
 };
 
-// every, AND operator
-const everyCorrects = student.questions.every(question => question.correct);
-everyCorrects;
+const allQuestionsCorrect = student.questions.every(question => question.correct);
+allQuestionsCorrect;
 
-// some, OR operator
-const someCorrect  = student.questions.some(question => question.correct);
-someCorrect;
+const atLeastOneCorrect = student.questions.some(question => question.correct);
+atLeastOneCorrect;
 
-//flat
-const arr = [
-  [1, 2, [3, 4, [5,6], 0]]
-]
-console.log(arr.flat(2));
+const nestedArray = [
+  [1, 2, [3, 4, [5, 6], 0]]
+];
+console.log(nestedArray.flat(2));
 
-//entries and fromEntries
-let obj = {
+let personData = {
   name: 'João',
   idade: 20,
   cidade: 'São Paulo'
-}
+};
 
-const objEntries = Object.entries(obj);
-objEntries;  
+const personEntries = Object.entries(personData);
+personEntries;
 
-const fromEntries = Object.fromEntries(objEntries);
-fromEntries;
+const personFromEntries = Object.fromEntries(personEntries);
+personFromEntries;
 
 const product = {
   name: "Monitor",
   price: 850,
   amount: 12,
-  category: "eletrônicos"
+  category: "technology"
 };
 
-const entriesProduto = Object.entries(product);
-const apenasNumeros = entriesProduto.filter((value) => typeof value === 'number').flat(1);
-apenasNumeros;
+const productEntries = Object.entries(product);
+productEntries;
 
-const colors = {
+const numericProductValues = productEntries
+  .filter(([key, value]) => typeof value === 'number')
+  .flat(1);
+
+numericProductValues;
+
+const colorHexMap = {
   blue: "#0000FF",
   red: "#FF0000",
   green: "#00FF00"
 };
 
-const invertion = Object.entries(colors).map(([key, value]) => [value, key]).flat(1);
-invertion;
+const invertedColorMap = Object.entries(colorHexMap)
+  .map(([color, hex]) => [hex, color])
+  .flat(1);
 
+invertedColorMap;
 
+const wordList = ["sun", "moon", "sun", "star", "moon"];
 
-
-
-
-
-
-
-
-// const colorEntries = Object.fromEntries(Object.entries(cores).map(([key, value]) => [value, key]));
-// colorEntries;
-
-const dados = {
-  Nome: "Carlos",
-  EMAIL: "carlos@example.com",
-  Cidade: "Rio"
-};
-
-const dadosNormalizados =
-Object.fromEntries(
-Object.entries(dados)
-.map(([key, value]) => [key.toLocaleLowerCase(), value]));
-
-dadosNormalizados;
-
-debugger
-const palavras = ["sol", "lua", "sol", "estrela", "lua"];
-const contagem = palavras.reduce((acc, palavra) => {
-  acc[palavra] = (acc[palavra] || 0) + 1;
+const wordFrequency = wordList.reduce((acc, word) => {
+  acc[word] = (acc[word] || 0) + 1;
   return acc;
 }, {});
+
+wordFrequency;
+
+const people = [
+  { id: '001', name: "Alice", age: 25 },
+  { id: '004', name: "Bob", age: 30 },
+  { id: '003', name: "Alice", age: 28 },
+  { id: '004', name: "Charlie", age: 35 }
+];
+
+const peopleEntries = Object.entries(
+  people.map(person => [person.id, person.name]).flat(1)
+);
+
+peopleEntries;
+
+const peopleMapped = Object.fromEntries(peopleEntries);
+peopleMapped;
+
+const extractedPeople = [];
+for (let index = 2; index < peopleEntries.length; index += 2) {
+  extractedPeople.push(peopleMapped[index], peopleMapped[++index]);
+}
+extractedPeople;
+
+const peopleFromEntries = Object.fromEntries(peopleEntries);
+peopleFromEntries;
+
+const quizQuestions = [
+  { questionId: "001", right: false },
+  { questionId: "002", right: true },
+  { questionId: "003", right: false },
+  { questionId: "004", right: true },
+  { questionId: "005", right: true },
+  { questionId: "001", right: true },
+  { questionId: "002", right: true },
+  { questionId: "003", right: true },
+  { questionId: "004", right: true },
+  { questionId: "005", right: true },
+  { questionId: "003", right: true },
+  { questionId: "004", right: false },
+  { questionId: "005", right: true }
+];
+
+let questionBaseMap = Object.fromEntries(
+  quizQuestions.map(q => [q.questionId, 0])
+);
+questionBaseMap;
+
+const normalizedQuestions = quizQuestions.map(question => {
+  return [question.questionId, 0];
+});
+
+normalizedQuestions;
+
+let correctAnswerCount = normalizedQuestions.map(question => {
+  return [
+    question[0],
+    quizQuestions.filter(q => q.questionId === question[0] && q.right).length
+  ];
+});
+
+correctAnswerCount;
+
+let totalCorrectAnswers = normalizedQuestions.map(pair => {
+  return [
+    pair[0],
+    quizQuestions.filter(q => q.questionId === pair[0] && q.right).length
+  ];
+});
+
+totalCorrectAnswers;
