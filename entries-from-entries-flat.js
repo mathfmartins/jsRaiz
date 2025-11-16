@@ -33,7 +33,7 @@ personEntries;
 const personFromEntries = Object.fromEntries(personEntries);
 personFromEntries;
 
-const product = {
+let product = {
   name: "Monitor",
   price: 850,
   amount: 12,
@@ -45,9 +45,10 @@ productEntries;
 
 const numericProductValues = productEntries
   .filter(([key, value]) => typeof value === 'number')
-  .flat(1);
-
+  
 numericProductValues;
+const productOnlyNumbers = Object.fromEntries(numericProductValues);
+productOnlyNumbers;
 
 const colorHexMap = {
   blue: "#0000FF",
@@ -77,24 +78,6 @@ const people = [
   { id: '004', name: "Charlie", age: 35 }
 ];
 
-const peopleEntries = Object.entries(
-  people.map(person => [person.id, person.name]).flat(1)
-);
-
-peopleEntries;
-
-const peopleMapped = Object.fromEntries(peopleEntries);
-peopleMapped;
-
-const extractedPeople = [];
-for (let index = 2; index < peopleEntries.length; index += 2) {
-  extractedPeople.push(peopleMapped[index], peopleMapped[++index]);
-}
-extractedPeople;
-
-const peopleFromEntries = Object.fromEntries(peopleEntries);
-peopleFromEntries;
-
 const quizQuestions = [
   { questionId: "001", right: false },
   { questionId: "002", right: true },
@@ -111,23 +94,10 @@ const quizQuestions = [
   { questionId: "005", right: true }
 ];
 
-let questionBaseMap = Object.fromEntries(
-  quizQuestions.map(q => [q.questionId, 0])
-);
+let questionBaseMap = quizQuestions.map((q) => q.questionId, q.right)
 questionBaseMap;
 
-const normalizedQuestions = quizQuestions.map(question => {
-  return [question.questionId, 0];
-});
 
-normalizedQuestions;
-
-let correctAnswerCount = normalizedQuestions.map(question => {
-  return [
-    question[0],
-    quizQuestions.filter(q => q.questionId === question[0] && q.right).length
-  ];
-});
 
 correctAnswerCount;
 
@@ -243,3 +213,9 @@ const sumNumeric = Object.entries(expenses).reduce((acc, [key, value]) => {
   return  acc += value;
 }, 0)
 sumNumeric;
+
+const obj2 = { a: 5, b: 12, c: 20 };
+
+const filtragem = Object.entries(obj2).filter(([key, value]) => value > 10);
+const x = Object.fromEntries(filtragem)
+console.log(x)
