@@ -91,22 +91,23 @@ const quizQuestions = [
   { questionId: "005", right: true },
   { questionId: "003", right: true },
   { questionId: "004", right: false },
-  { questionId: "005", right: true }
+  { questionId: "005", right: true },
+  { questionId: "005", right: true },
+  { questionId: "005", right: true },
+  { questionId: "005", right: true },
+  { questionId: "005", right: true },
 ];
 
-let questionBaseMap = quizQuestions.map((q) => q.questionId, q.right)
+let questionBaseMap = (quizQuestions.map((quiz) => {
+ return [quiz.questionId, quiz.right]
+}));
 questionBaseMap;
 
 
-
-correctAnswerCount;
-
-let totalCorrectAnswers = normalizedQuestions.map(pair => {
-  return [
-    pair[0],
-    quizQuestions.filter(q => q.questionId === pair[0] && q.right).length
-  ];
-});
+let totalCorrectAnswers = questionBaseMap.reduce((acc, [key, value])=> {
+  acc[key] = (acc[key] || 0) + 1;
+  return  acc;
+}, {});
 
 totalCorrectAnswers;
 
@@ -119,9 +120,11 @@ const something = {
 };
 
 const somethingEntries = Object.entries(something);
-const stringOnly = somethingEntries.filter(([key, value]) => {
+const stringOnly = 
+Object.fromEntries(
+somethingEntries.filter(([key, value]) => {
   return typeof (value) === 'string';
-});
+}));
 stringOnly
 
 let userScores = {
@@ -132,8 +135,8 @@ let userScores = {
 };
 
 const highScores = Object.entries(userScores)
-  .filter(([key, value]) => value >= 70
-  ).map(([k, v]) => {
+  .filter(([_, value]) => value >= 70
+  ).map(([k, _]) => {
     return k;
   });
 
@@ -145,7 +148,8 @@ const obj = {
   storage: 5
 };
 
-const stringArr = Object.entries(obj).map(([key, value]) => {
+const stringArr =
+Object.entries(obj).map(([key, value]) => {
   return [key, value.toString()];
 }).flat(2);
 stringArr;
@@ -158,9 +162,6 @@ const mixed = {
   premium: false,
   nickname: "Rob"
 };
-
-let types = {};
-
 
 
 const result =  Object.entries(mixed).reduce((acc, [_, value]) => {
@@ -178,11 +179,12 @@ const users = [
   { id: '004', name: "Diego Martins", email: "diego.martins@example.com" }
 ];
 
-const usersReduce = users.reduce((acc, user) => {
-    acc[user.id] = user;
-    return acc;
-}, {})
-usersReduce;
+const usersMap = users.map((user) => {
+    return [ user.id,  user.name] ;
+})
+usersMap;
+const invertion = Object.fromEntries(usersMap);
+invertion;
 
 const usersEntries = Object.fromEntries(users.map((u) => {
     return [u.id, u];
@@ -209,13 +211,13 @@ const expenses = {
   entertainment: 45
 };
 
-const sumNumeric = Object.entries(expenses).reduce((acc, [key, value]) => {
+const sumNumeric = Object.entries(expenses).reduce((acc, [_, value]) => {
   return  acc += value;
 }, 0)
 sumNumeric;
 
 const obj2 = { a: 5, b: 12, c: 20 };
 
-const filtragem = Object.entries(obj2).filter(([key, value]) => value > 10);
-const x = Object.fromEntries(filtragem)
-console.log(x)
+const greaterThanTen = Object.entries(obj2).filter(([_, value]) => value > 10);
+const result42 = Object.fromEntries(greaterThanTen);
+result42;
