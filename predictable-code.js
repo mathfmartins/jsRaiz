@@ -8,17 +8,18 @@ const student = {
     { numero: 3, correct: false }
   ]
 };
-
+//every - and operator
 const allQuestionsCorrect = student.questions.every(question => question.correct);
 allQuestionsCorrect;
 
+//some - or operator
 const atLeastOneCorrect = student.questions.some(question => question.correct);
 atLeastOneCorrect;
 
 const nestedArray = [
   [1, 2, [3, 4, [5, 6], 0]]
 ];
-console.log(nestedArray.flat(2));
+console.log(nestedArray.flat(3));
 
 let personData = {
   name: 'João',
@@ -138,3 +139,107 @@ let totalCorrectAnswers = normalizedQuestions.map(pair => {
 });
 
 totalCorrectAnswers;
+
+
+const something = {
+  name: "something name",
+  price: 29.9,
+  category: "something category",
+  storaged: 10
+};
+
+const somethingEntries = Object.entries(something);
+const stringOnly = somethingEntries.filter(([key, value]) => {
+  return typeof (value) === 'string';
+});
+stringOnly
+
+let userScores = {
+  alice: 82,
+  bob: 47,
+  charlie: 91,
+  diana: 64
+};
+
+const highScores = Object.entries(userScores)
+  .filter(([key, value]) => value >= 70
+  ).map(([k, v]) => {
+    return k;
+  });
+
+highScores;
+
+const obj = {
+  name: "Laptop",
+  price: 1200,
+  storage: 5
+};
+
+const stringArr = Object.entries(obj).map(([key, value]) => {
+  return [key, value.toString()];
+}).flat(2);
+stringArr;
+
+const mixed = {
+  id: 10,
+  name: "Robert",
+  active: true,
+  score: 55,
+  premium: false,
+  nickname: "Rob"
+};
+
+let types = {};
+
+
+
+const result =  Object.entries(mixed).reduce((acc, [_, value]) => {
+    const type = typeof value;
+    acc[type] = (acc[type] || 0) + 1;
+    return acc;
+  }, {});
+result;
+
+
+const users = [
+  { id: '001', name: "Ana Silva", email: "ana.silva@example.com" },
+  { id: '002', name: "Bruno Costa", email: "bruno.costa@example.com" },
+  { id: '003', name: "Carla Souza", email: "carla.souza@example.com" },
+  { id: '004', name: "Diego Martins", email: "diego.martins@example.com" }
+];
+
+const usersReduce = users.reduce((acc, user) => {
+    acc[user.id] = user;
+    return acc;
+}, {})
+usersReduce;
+
+const usersEntries = Object.fromEntries(users.map((u) => {
+    return [u.id, u];
+}));
+usersEntries;
+
+const laptop = {
+  name: "Laptop",
+  price: 1499,
+  stock: 32,
+  category: "electronics"
+};
+
+const laptopString = Object.entries(laptop).map(([key, value]) => {
+  return  `${key}: ${value}`
+}).flat(2);
+
+laptopString;
+
+const expenses = {
+  food: 120,
+  transport: 58,
+  internet: 99,
+  entertainment: 45
+};
+
+const sumNumeric = Object.entries(expenses).reduce((acc, [key, value]) => {
+  return  acc += value;
+}, 0)
+sumNumeric;
