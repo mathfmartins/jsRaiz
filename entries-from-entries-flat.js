@@ -56,11 +56,12 @@ const colorHexMap = {
   green: "#00FF00"
 };
 
-const invertedColorMap = Object.entries(colorHexMap)
-  .map(([color, hex]) => [hex, color])
-  .flat(1);
-
-invertedColorMap;
+let arrX = []
+Object.entries(colorHexMap)
+  .map(([color, hex]) => arrX.push([hex, color]));
+arrX;
+invertedColorHexMap = Object.fromEntries(arrX);
+invertedColorHexMap;
 
 const wordList = ["sun", "moon", "sun", "star", "moon"];
 
@@ -92,10 +93,10 @@ const quizQuestions = [
   { questionId: "003", right: true },
   { questionId: "004", right: false },
   { questionId: "005", right: true },
-  { questionId: "005", right: true },
-  { questionId: "005", right: true },
-  { questionId: "005", right: true },
-  { questionId: "005", right: true },
+  { questionId: "002", right: true },
+  { questionId: "001", right: true },
+  { questionId: "004", right: true },
+  { questionId: "003", right: true },
 ];
 
 let questionBaseMap = (quizQuestions.map((quiz) => {
@@ -104,7 +105,7 @@ let questionBaseMap = (quizQuestions.map((quiz) => {
 questionBaseMap;
 
 
-let totalCorrectAnswers = questionBaseMap.reduce((acc, [key, value])=> {
+let totalCorrectAnswers = questionBaseMap.reduce((acc, [key, _])=> {
   acc[key] = (acc[key] || 0) + 1;
   return  acc;
 }, {});
@@ -123,7 +124,7 @@ const somethingEntries = Object.entries(something);
 const stringOnly = 
 Object.fromEntries(
 somethingEntries.filter(([key, value]) => {
-  return typeof (value) === 'string';
+  return typeof (value) === 'st ring';
 }));
 stringOnly
 
