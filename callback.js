@@ -53,5 +53,3 @@ Array.prototype.filterClone = function (fn) {
 const resulFilter = arr.filterClone((e) => e > 2);
 resulFilter;
 
-
-Array.prototype.f
