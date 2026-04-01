@@ -13,16 +13,6 @@ const calcula = (fn, a, b) => {
 const resultado = calcula(soma, 5, 3);
 resultado;
 
-function soma2(a, b, fn) {
-    const resultado = a + b;
-    fn(resultado);
-    return resultado;
-}
-
-const resultado2 = soma2(4, 5, (resultado) => {
-    return resultado * 2;
-});
-resultado2;
 
 Array.prototype.mapClone = function (fn) {
     let arrResult = [];
