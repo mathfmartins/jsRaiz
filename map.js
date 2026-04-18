@@ -69,4 +69,4 @@ const objKey = { id: 1 };
 const advancedMap = new Map();
 advancedMap.set(objKey, 'object value');
 
-console.log(advancedMap.get(objKey)); // object value
+console.log(advancedMap.get(objKey)); 
