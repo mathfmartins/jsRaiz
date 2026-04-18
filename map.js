@@ -62,4 +62,11 @@ console.log(sparseArray[0]); // undefined
 const exampleMap = new Map();
 exampleMap.set(42, 'hello');
 
-console.log(exampleMap.size); // 1 (mais consistente!)
+console.log(exampleMap.size);
+
+const objKey = { id: 1 };
+
+const advancedMap = new Map();
+advancedMap.set(objKey, 'object value');
+
+console.log(advancedMap.get(objKey)); // object value
