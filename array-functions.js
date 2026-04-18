@@ -34,7 +34,7 @@ const agrupamentoPorSexo = usuarios.reduce((acc, usuario) => ({
         ...acc,
         [usuario.sexo]: acc[usuario.sexo] + 1
     }), {M: 0, F: 0 });
-    
+
 console.log(agrupamentoPorSexo)
 
 
