@@ -70,3 +70,10 @@ const advancedMap = new Map();
 advancedMap.set(objKey, 'object value');
 
 console.log(advancedMap.get(objKey)); 
+
+
+const testMap = new Map();
+
+testMap.set(NaN, 'not a number');
+
+console.log(testMap.get(NaN)); // it works!
