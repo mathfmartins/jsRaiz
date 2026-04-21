@@ -77,3 +77,10 @@ const testMap = new Map();
 testMap.set(NaN, 'not a number');
 
 console.log(testMap.get(NaN)); // it works!
+
+const clonedMap = new Map(userRolesMap);
+
+const map1 = new Map([[1, 'one']]);
+const map2 = new Map([[2, 'two']]);
+
+const mergedMap = new Map([...map1, ...map2]);
