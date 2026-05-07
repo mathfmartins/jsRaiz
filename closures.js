@@ -40,8 +40,8 @@ function sum(a, b, fn) {
 }
 
 function multi(num) {
-    return function(sumResult) {
-        return num * sumResult;
+    return function(value) {
+        return num * value;
     }
 }
 
