@@ -30,8 +30,7 @@ function lastNameFn(lastName) {
 
 function multiReduce(mult) {
     return function (acc, current) {
-        acc.push(current * mult);
-        return acc;
+        return [...acc, (current * mult)]
     }
     console.log(acc);
 }
@@ -64,4 +63,5 @@ function oddFn() {
 }
 
 const impares = [1,2,3,4,5].reduce(oddFn(), []);
-console.log(impares)
+console.log(impares);
+
