@@ -134,18 +134,16 @@ const products = [
   }
 ];
 
-const groupByCategory = products.reduce((acc, product) => {
-    return (!acc[product.category]) ?
-     {...acc, [product.category]: [product]} :
-     {...acc, [product.category]: [...acc[product.category]]};
+const groupByCategory = products.reduce(
+    (acc, product) => ({ 
+        ...acc,
+        [product.category]: 
+        [...(acc[product.category] || []),
+           product.name
+        ]
+    }), {}
 
-    // if (!acc[product.category]) {
-    //     acc[product.category] = [];
-    // }
-    // acc[product.category].push(product.name);
-    // return acc;
-
-}, {});
+);
 
 console.log(groupByCategory);
 
