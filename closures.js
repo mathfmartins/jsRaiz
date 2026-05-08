@@ -28,6 +28,16 @@ function lastNameFn(lastName) {
     }
 }
 
+function multiReduce(mult) {
+    return function (acc, current) {
+        acc.push(current * mult);
+        return acc;
+    }
+    console.log(acc);
+}
+
+const reduceValues = [10, 20, 30].reduce(multiReduce(2), [])
+
 const fullName = lastNameFn('Martins', firstNameFn);
 console.log(fullName('Matheus'));
 console.log(fullName('Jõao'));
@@ -46,3 +56,12 @@ function multi(num) {
 }
 
 console.log(sum(3, 7, multi(10)))
+
+function oddFn() {
+    return function(acc, current) {
+        return current % 2 !== 0 ? [...acc, current] : acc; 
+    }
+}
+
+const impares = [1,2,3,4,5].reduce(oddFn(), []);
+console.log(impares)
