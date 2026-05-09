@@ -134,16 +134,15 @@ const products = [
   }
 ];
 
-const groupByCategory = products.reduce(
-    (acc, product) => ({ 
-        ...acc,
-        [product.category]: 
-        [...(acc[product.category] || []),
-           product.name
-        ]
-    }), {}
+const groupByCategory = products.reduce(groupBy('category'), {});
 
-);
+function groupBy(type) {
+    return (acc, current) => ({
+        ...acc,
+        [current[type]]: [...(acc[current[type]] || []), 
+            current]
+    })
+}
 
 console.log(groupByCategory);
 
@@ -200,3 +199,12 @@ const groupByPrice = products.reduce((acc, current) => {
     over200: []
 });
 console.log(groupByPrice);
+
+
+function soma(a, b, fn) {
+  return fn(a + b);
+}
+
+const v = soma(3, 7, (v) => {
+  v * 2;
+});
