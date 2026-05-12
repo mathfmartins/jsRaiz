@@ -2,14 +2,14 @@
 // even after an external function has finished executing.
 
 function outside() {
-    let count = 0;
+  let count = 0;
 
-    function inside() {
-        count++;
-        console.log(count);
-    }
+  function inside() {
+    count++;
+    console.log(count);
+  }
 
-    return inside;
+  return inside;
 }
 
 const myFn = outside();
@@ -19,22 +19,14 @@ myFn(); // 2
 myFn(); // 3
 
 function firstNameFn(firstName, fn) {
-    return fn(firstName)
+  return fn(firstName)
 }
 
 function lastNameFn(lastName) {
-    return function(firstName) {
-        return `${firstName} ${lastName}`;
-    }
+  return function (firstName) {
+    return `${firstName} ${lastName}`;
+  }
 }
-
-function multiReduce(mult) {
-    return function (acc, current) {
-        return [...acc, (current * mult)]
-    }
-    console.log(acc);
-}
-
 const reduceValues = [10, 20, 30].reduce(multiReduce(2), [])
 
 const fullName = lastNameFn('Martins', firstNameFn);
@@ -43,26 +35,32 @@ console.log(fullName('Jõao'));
 console.log(fullName('Henrique'));
 console.log(fullName('Paulo'));
 
+function multiReduce(mult) {
+  return function (acc, current) {
+    return [...acc, (current * mult)]
+  }
+  console.log(acc);
+}
 
 function sum(a, b, fn) {
-     return fn(a + b);
+  return fn(a + b);
 }
 
 function multi(num) {
-    return function(value) {
-        return num * value;
-    }
+  return function (value) {
+    return num * value;
+  }
 }
 
 console.log(sum(3, 7, multi(10)))
 
 function oddFn() {
-    return function(acc, current) {
-        return current % 2 !== 0 ? [...acc, current] : acc; 
-    }
+  return function (acc, current) {
+    return current % 2 !== 0 ? [...acc, current] : acc;
+  }
 }
 
-const impares = [1,2,3,4,5].reduce(oddFn(), []);
+const impares = [1, 2, 3, 4, 5].reduce(oddFn(), []);
 console.log(impares);
 
 
@@ -137,11 +135,11 @@ const products = [
 const groupByCategory = products.reduce(groupBy('category'), {});
 
 function groupBy(type) {
-    return (acc, current) => ({
-        ...acc,
-        [current[type]]: [...(acc[current[type]] || []), 
-            current]
-    })
+  return (acc, current) => ({
+    ...acc,
+    [current[type]]: [...(acc[current[type]] || []),
+      current]
+  })
 }
 
 console.log(groupByCategory);
@@ -169,34 +167,34 @@ const productsWithId = [
 ]
 
 const groupById = productsWithId.reduce((acc, product) => {
-    acc[product.id] = product;
-    
-    return acc;
+  acc[product.id] = product;
+
+  return acc;
 }, [])
 
 console.log(groupById);
 // to do: refator using strategy to remove ifs
 const groupByPrice = products.reduce((acc, current) => {
 
-    const price = current.price;
+  const price = current.price;
 
-    if (price <= 50) {
-        acc.until50.push(current);
-    }
+  if (price <= 50) {
+    acc.until50.push(current);
+  }
 
-    if (price < 100) {
-        acc.betwwen50And100.push(current);
-    }
+  if (price < 100) {
+    acc.betwwen50And100.push(current);
+  }
 
-    if (price > 200) {
-        acc.over200.push(current)
-    }
-    return acc;
+  if (price > 200) {
+    acc.over200.push(current)
+  }
+  return acc;
 
 }, {
-    until50: [],
-    betwwen50And100: [],
-    over200: []
+  until50: [],
+  betwwen50And100: [],
+  over200: []
 });
 console.log(groupByPrice);
 
